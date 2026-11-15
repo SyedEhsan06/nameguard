@@ -31,7 +31,7 @@ check("paytm", { categories: ["brand"] });      // { ok: false, reason: "brand" 
 check("chutiya", { languages: ["en"] });        // { ok: true }, Hinglish is switched off
 check("razorpai");                              // { ok: true }
 check("razorpai", { level: "strict" });         // { ok: false, reason: "brand" }
-check("merchantly", { block: ["merchantly"] }); // { ok: false, reason: "blocked" }
+check("ehsan", { block: ["ehsan"] }); // { ok: false, reason: "blocked" }
 check("paytm", { allow: ["paytm"] });           // { ok: true }
 ```
 
