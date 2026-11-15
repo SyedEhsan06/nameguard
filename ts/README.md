@@ -63,6 +63,29 @@ check("paytm", { allow: ["paytm"] });           // { ok: true }
 check("john.doe", { profile: "username" });     // { ok: true }
 ```
 
+These are all the attributes you can set. Every one is optional.
+
+| attribute | default | what it does |
+| --- | --- | --- |
+| `profile` | `"slug"` | `"slug"`: 3 to 63 characters of `a-z 0-9 -`. `"username"`: 3 to 30 characters, also allows `.` and `_` |
+| `categories` | all | any of `"reserved"`, `"brand"`, `"scam"`, `"abuse"` |
+| `languages` | all | `"en"`, `"hi-latn"` (Hinglish, Hindi in Latin letters) |
+| `level` | `"normal"` | how close a name must be to a listed word, see below |
+| `allow` | none | names or words that always pass |
+| `block` | none | extra words to block, as a string or `{ word, mode }` where mode is `"exact"`, `"part"` or `"contains"` |
+| `words` | built in | replace the whole word list with your own |
+
+`level` controls how close counts:
+
+| level | catches |
+| --- | --- |
+| `"exact"` | the name is literally a listed word |
+| `"normal"` | also hyphen tricks (`a-d-m-i-n`), swapped digits (`adm1n`) and trailing digits (`admin2`) |
+| `"strict"` | also repeated letters (`fuuuck`) and one typo in brands and reserved names (`razorpai`) |
+| `"paranoid"` | also two typos, typos in every category and words buried inside longer names |
+
+You can set a level per category: `level: { default: "normal", brand: "strict" }`.
+
 If you check many names, build a guard once and reuse it:
 
 ```ts
