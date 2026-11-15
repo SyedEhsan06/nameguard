@@ -138,6 +138,16 @@ Server side only. Never show this to users.
 | `allow` | names to always allow | none |
 | `block` | words to block | none |
 
+## Speed
+
+| level | per check | checks per second |
+| --- | --- | --- |
+| `normal` (default) | 1.3 µs | about 790,000 |
+| `strict` | 4.4 µs | about 225,000 |
+| `paranoid` | 26 µs | about 38,000 |
+
+Measured on an Apple M4 with Node 22. Build a guard once at startup, not per request.
+
 More details, the word list and issues: [github.com/SyedEhsan06/nameguard](https://github.com/SyedEhsan06/nameguard)
 
 MIT

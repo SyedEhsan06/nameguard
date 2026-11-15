@@ -147,7 +147,15 @@ Each entry looks like this:
 
 ## Speed
 
-On an M series laptop a check takes roughly 1 to 3 microseconds at the default level. Exact and part matches are hash lookups, `contains` words go through an Aho-Corasick automaton, and typo matching uses a deletion index, so list size barely changes check time. A 100,000 word list builds in about 20 ms. Build the guard once at startup rather than per request. To see numbers on your machine:
+Measured on an Apple M4 with Node 22, over a mix of typical names:
+
+| level | time per check | checks per second |
+| --- | --- | --- |
+| `normal` (default) | 1.3 µs | about 790,000 |
+| `strict` | 4.4 µs | about 225,000 |
+| `paranoid` | 26 µs | about 38,000 |
+
+Creating the default guard takes under 2 ms. Exact and part matches are hash lookups, `contains` words go through an Aho-Corasick automaton, and typo matching uses a deletion index, so list size barely changes check time. A 100,000 word list builds in about 20 ms and checks in about 2 µs. Build the guard once at startup rather than per request. Your numbers will differ, to see them:
 
 ```sh
 cd ts
