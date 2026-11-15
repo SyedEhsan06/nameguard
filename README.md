@@ -25,12 +25,8 @@ check("mail-order-store"); // { ok: true }
 
 ## Install
 
-Not on npm yet. Until it is, clone the repo and build the `ts` folder:
-
 ```sh
-cd ts
-npm install
-npm run build
+npm install nameguard
 ```
 
 A Go version that shares the same word list and test cases is planned.
