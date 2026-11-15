@@ -125,7 +125,7 @@ Names are checked in a few forms: as written, with hyphens removed, with digits 
 
 ## Word list
 
-The list lives in [`data/words.json`](data/words.json), about 370 entries today across English and Hinglish. It is a starting point and it is not reviewed by a large group of native speakers yet. If you find a miss or a false positive, open an issue or a pull request, and add a case to [`data/testcases.json`](data/testcases.json) with it.
+The list lives in [`data/words.json`](data/words.json), about 800 entries today across English and Hinglish. It is a starting point and it is not reviewed by a large group of native speakers yet. If you find a miss or a false positive, open an issue or a pull request, and add a case to [`data/testcases.json`](data/testcases.json) with it.
 
 Each entry looks like this:
 
