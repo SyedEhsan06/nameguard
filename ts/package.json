@@ -1,6 +1,6 @@
 {
   "name": "nameguard",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Fast, zero-dependency checker that blocks reserved, brand, abusive and scam names in slugs, subdomains and usernames.",
   "license": "MIT",
   "type": "module",
