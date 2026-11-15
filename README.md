@@ -18,6 +18,7 @@ check("demostore");       // { ok: true }
 check("adm1n");           // { ok: false, reason: "reserved" }
 check("a-d-m-i-n");       // { ok: false, reason: "reserved" }
 check("paytm-support");   // { ok: false, reason: "brand" }
+check("sh1t-store");      // { ok: false, reason: "abusive" }
 check("assam-silk");      // { ok: true }
 check("mail-order-store"); // { ok: true }
 ```
