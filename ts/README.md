@@ -49,18 +49,26 @@ Send users one generic message. Log `result.reason` yourself.
 ## Choose what to filter
 
 ```ts
-check("paytm", { categories: ["brand"] });                 // only brands
-check("fuck-you", { categories: ["brand", "reserved"] });  // { ok: true }
-check("chutiya", { languages: ["en"] });                   // { ok: true }
-check("chutiya", { languages: ["hi-latn"] });              // { ok: false, reason: "abusive" }
+const brandsOnly = { categories: ["brand"] };
+
+check("paytm", brandsOnly);     // { ok: false, reason: "brand" }
+check("fuck-you", brandsOnly);  // { ok: true }
+
+const english = { languages: ["en"] };
+const hinglish = { languages: ["hi-latn"] };
+
+check("chutiya", english);      // { ok: true }
+check("chutiya", hinglish);     // { ok: false, reason: "abusive" }
 ```
 
 ## Match level
 
 ```ts
-check("razorpai");                       // { ok: true }
-check("razorpai", { level: "strict" });  // { ok: false, reason: "brand" }
-check("fuuuck", { level: "strict" });    // { ok: false, reason: "abusive" }
+const strict = { level: "strict" };
+
+check("razorpai");          // { ok: true }
+check("razorpai", strict);  // { ok: false, reason: "brand" }
+check("fuuuck", strict);    // { ok: false, reason: "abusive" }
 ```
 
 `exact`, `normal` (default), `strict`, `paranoid`. Higher catches more, and also blocks more innocent names.
@@ -74,17 +82,26 @@ createGuard({ level: { default: "normal", brand: "strict" } });
 ## Your own words
 
 ```ts
-check("merchantly", { block: ["merchantly"] });                           // { ok: false, reason: "blocked" }
-check("my-merchantly-shop", { block: ["merchantly"] });                   // { ok: false, reason: "blocked" }
-check("merchantlyshop", { block: [{ word: "merchantly", mode: "contains" }] }); // { ok: false, reason: "blocked" }
-check("paytm", { allow: ["paytm"] });                                     // { ok: true }
+const mine = { block: ["merchantly"] };
+
+check("merchantly", mine);          // { ok: false, reason: "blocked" }
+check("my-merchantly-shop", mine);  // { ok: false, reason: "blocked" }
+check("merchantlyshop", mine);      // { ok: true }
+
+const anywhere = { block: [{ word: "merchantly", mode: "contains" }] };
+
+check("merchantlyshop", anywhere);  // { ok: false, reason: "blocked" }
+
+check("paytm", { allow: ["paytm"] });  // { ok: true }
 ```
 
 ## Usernames
 
 ```ts
-check("john.doe", { profile: "username" });  // { ok: true }
-check("john.doe");                           // { ok: false, reason: "invalid_format" }
+const user = { profile: "username" };
+
+check("john.doe", user);  // { ok: true }
+check("john.doe");        // { ok: false, reason: "invalid_format" }
 ```
 
 ## Reuse a guard
