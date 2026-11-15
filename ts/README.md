@@ -13,13 +13,30 @@ npm install nameguard
 ```ts
 import { check } from "nameguard";
 
-check("demostore");      // { ok: true }
-check("adm1n");          // { ok: false, reason: "reserved" }
-check("a-d-m-i-n");      // { ok: false, reason: "reserved" }
-check("paytm-support");  // { ok: false, reason: "brand" }
-check("sh1t-store");     // { ok: false, reason: "abusive" }
-check("scam-alert");     // { ok: false, reason: "scam" }
-check("assam-silk");     // { ok: true }
+// names your platform keeps for itself
+check("support");           // { ok: false, reason: "reserved" }
+check("adm1n");             // { ok: false, reason: "reserved" }
+check("a-d-m-i-n");         // { ok: false, reason: "reserved" }
+
+// brands and lookalikes
+check("hdfc-bank");         // { ok: false, reason: "brand" }
+check("g00gle-store");      // { ok: false, reason: "brand" }
+check("paytm-support");     // { ok: false, reason: "brand" }
+
+// abusive words, English and Hinglish
+check("sh1t-store");        // { ok: false, reason: "abusive" }
+check("f-u-c-k");           // { ok: false, reason: "abusive" }
+check("chut-shop");         // { ok: false, reason: "abusive" }
+
+// scam terms
+check("scam-alert");        // { ok: false, reason: "scam" }
+check("phishing-kit");      // { ok: false, reason: "scam" }
+
+// fine, even though some contain a bad word
+check("demostore");         // { ok: true }
+check("assam-silk");        // { ok: true }
+check("mail-order-store");  // { ok: true }
+check("chutney-house");     // { ok: true }
 ```
 
 Tricks like hyphens and swapped digits are caught, and innocent names that happen to contain a bad word (`assam-silk`, `mail-order-store`) pass.
