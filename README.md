@@ -23,6 +23,20 @@ check("assam-silk");      // { ok: true }
 check("mail-order-store"); // { ok: true }
 ```
 
+You choose what to filter, and how close a name has to be to a listed word:
+
+```ts
+check("fuck-you", { categories: ["brand"] });   // { ok: true }, abuse is switched off
+check("paytm", { categories: ["brand"] });      // { ok: false, reason: "brand" }
+check("chutiya", { languages: ["en"] });        // { ok: true }, Hinglish is switched off
+check("razorpai");                              // { ok: true }
+check("razorpai", { level: "strict" });         // { ok: false, reason: "brand" }
+check("merchantly", { block: ["merchantly"] }); // { ok: false, reason: "blocked" }
+check("paytm", { allow: ["paytm"] });           // { ok: true }
+```
+
+All the options are listed under [Options](#options).
+
 ## Install
 
 ```sh
